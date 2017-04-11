@@ -28,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/users', users);
 
 app.get('/', function(req, res) {
-  x('https://bozeman.craigslist.org/about/sites', '.box', [{
+  x('https://www.craigslist.org/about/sites', '.box', [{
     state: 'h4',
     cities: x('ul', [{
       city: 'li'
@@ -41,6 +41,29 @@ app.get('/', function(req, res) {
     }
   })
 });
+
+app.post('/search', function(req, res) {
+  var location = "https://" + req.body.city + ".craigslist.org/search/zip"
+  console.log(location);
+  x(location, 'body@html')(function(err, scraped) {
+    if(err) {
+      console.log(err, "Error scraping");
+    } else {
+      res.render('results', {title: "Craigslist Scraper - Results", scrapedData: scraped});
+    }
+  })
+});
+
+// app.get('/results/:city', function(req, res) {
+//   var location = "https://" + req.params.city + ".craigslist.org/search/zip"
+//   x(location, 'body@html')(function(err, scraped) {
+//     if(err) {
+//       console.log(err, "Error scraping");
+//     } else {
+//       res.render('results', {title: "Craigslist Scraper - Results", scrapedData: scraped});
+//     }
+//   })
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

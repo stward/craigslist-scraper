@@ -4,14 +4,14 @@ block content
   .container
     .row
       h1= title
-      form(action="search", method="POST")
-      .col-sm-6
-        each d in scrapedData
-          .form-group
-            h5= d.state
-            select.form-control
-              option(value="") - Select -
-              each c in d.cities
-                option(value="#{c.city}")= c.city
-      .col-sm-6
-        input.btn.btn-primary(type="submit", style="position: fixed; bottom: 5%; right: 5%;")
+      form(method="POST", action="/search")
+        .col-sm-6
+          each d in scrapedData
+            .form-group
+              h5= d.state
+              select.form-control(name="city")
+                option(value="") - Select -
+                each c in d.cities
+                  option(value="#{c.city}")= c.city
+        .col-sm-6
+          input.btn.btn-primary(type="submit", style="position: fixed; bottom: 5%; right: 5%;")
