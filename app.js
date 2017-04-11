@@ -28,7 +28,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/users', users);
 
 app.get('/', function(req, res) {
-  x('https://bozeman.craigslist.org/search/zip', 'body@html')(function(err, scraped) {
+  x('https://bozeman.craigslist.org/about/sites', '.box', [{
+    state: 'h4',
+    cities: x('ul', [{
+      city: 'li'
+    }])
+  }])(function(err, scraped) {
     if(err) {
       console.log(err, "Error scraping");
     } else {
