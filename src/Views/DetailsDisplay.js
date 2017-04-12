@@ -5,7 +5,7 @@ const DetailsDisplay = (props) => {
       <div>
         <h1> DETAILS PAGE </h1>
       </div>
-    )
+    );
 }
 
 export default DetailsDisplay;

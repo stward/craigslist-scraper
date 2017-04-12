@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import ResultsDisplay from '../Views/ResultsDisplay';
-
+import DetailsDisplay from '../Views/DetailsDisplay';
 
 class ResultsContainer extends Component {
   render () {
     return (
       <div>
-        <ResultsDisplay />
+        {this.state.detailsId ? <DetailsDisplay /> : <ResultsDisplay />}
       </div>
     )
   }
